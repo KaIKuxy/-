@@ -6,7 +6,7 @@
 //	I	J	L	O	S	T	Z
 
 #include "TetriminoClass.h"
-/*
+
 TetriminoPosition iRotate[2] = {
 									TetriminoPosition(Position(1, 1), Position(0, 0), Position(-1, -1), Position(-2, -2)),
 									TetriminoPosition(Position(-1, -1), Position(0, 0), Position(1, 1), Position(2, 2))};
@@ -31,12 +31,11 @@ TetriminoPosition tRotate[4] = {
 									TetriminoPosition(Position(1, -1), Position(1, 1), Position(0, 0), Position(-1, -1)),
 									TetriminoPosition(Position(1, 1), Position(-1, 1), Position(0, 0), Position(1, -1)),
 									TetriminoPosition(Position(-1, 1), Position(-1, -1), Position(0, 0), Position(1, 1)),
-									TetriminoPosition(Position(-1, -1), Position(1, -1), Position(0, 0), Position(-2, 1))};
+									TetriminoPosition(Position(-1, -1), Position(1, -1), Position(0, 0), Position(-1, 1))};
 
 TetriminoPosition zRotate[2] = {
 									TetriminoPosition(Position(1, 1), Position(0, 0), Position(-1, -1), Position(0, -2)),
 									TetriminoPosition(Position(-1, -1), Position(0, 0), Position(1, 1), Position(0, 2))};
-*/
 
 Tetrimino::Tetrimino() {}
 
@@ -242,7 +241,7 @@ Tetris_Z::Tetris_Z(int Type) {
 }
 
 TetriminoPosition Tetris_I::rotatable() {
-
+	this->moveTo
 }
 
 TetriminoPosition Tetris_J::rotatable() {
