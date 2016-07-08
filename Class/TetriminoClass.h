@@ -1,7 +1,9 @@
-//A Tetrimino contains four Minos
-//Row: 16   Column: 10
-//From left: 0 -> 9   From down: 0 -> 15
-//1280*720
+/*
+	A Tetrimino contains four Minos
+	Row: 16   Column: 10
+	From left: 0 -> 9   From down: 0 -> 15
+	1280*720
+*/
 
 #include "MinoClass.h"
 
