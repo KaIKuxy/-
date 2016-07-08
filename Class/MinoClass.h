@@ -12,6 +12,7 @@ public:
 	void setPos(Position);
 	Position getPos();
 	bool samePos(Position);
+	bool onRow(int);
 
 private:
 	Position pos;

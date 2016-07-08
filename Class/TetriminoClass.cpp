@@ -7,36 +7,6 @@
 
 #include "TetriminoClass.h"
 
-TetriminoPosition iRotate[2] = {
-									TetriminoPosition(Position(1, 1), Position(0, 0), Position(-1, -1), Position(-2, -2)),
-									TetriminoPosition(Position(-1, -1), Position(0, 0), Position(1, 1), Position(2, 2))};
-
-TetriminoPosition jRotate[4] = {
-									TetriminoPosition(Position(1, 1), Position(0, 0), Position(-1, -1), Position(0, -2)),
-									TetriminoPosition(Position(-1, 1), Position(0, 0), Position(1, -1), Position(2, 0)),
-									TetriminoPosition(Position(-1, -1), Position(0, 0), Position(1, 1), Position(0, 2)),
-									TetriminoPosition(Position(1, -1), Position(0, 0), Position(-1, 1), Position(-2, 0))};
-
-TetriminoPosition lRotate[4] = {
-									TetriminoPosition(Position(-1, -1), Position(0, 0), Position(1, 1), Position(2, 0)),
-									TetriminoPosition(Position(1, -1), Position(0, 0), Position(-1, 1), Position(0, 2)),
-									TetriminoPosition(Position(1, 1), Position(0, 0), Position(-1, -1), Position(-2, 0)),
-									TetriminoPosition(Position(-1, 1), Position(0, 0), Position(1, -1), Position(0, -2))};
-
-TetriminoPosition sRotate[2] = {
-									TetriminoPosition(Position(-1, 0), Position(0, 1), Position(1, 0), Position(2, 1)),
-									TetriminoPosition(Position(1, 0), Position(0, -1), Position(-1, 0), Position(-2, -1))};
-
-TetriminoPosition tRotate[4] = {	
-									TetriminoPosition(Position(1, -1), Position(1, 1), Position(0, 0), Position(-1, -1)),
-									TetriminoPosition(Position(1, 1), Position(-1, 1), Position(0, 0), Position(1, -1)),
-									TetriminoPosition(Position(-1, 1), Position(-1, -1), Position(0, 0), Position(1, 1)),
-									TetriminoPosition(Position(-1, -1), Position(1, -1), Position(0, 0), Position(-1, 1))};
-
-TetriminoPosition zRotate[2] = {
-									TetriminoPosition(Position(1, 1), Position(0, 0), Position(-1, -1), Position(0, -2)),
-									TetriminoPosition(Position(-1, -1), Position(0, 0), Position(1, 1), Position(0, 2))};
-
 Tetrimino::Tetrimino() {}
 
 TetriminoPosition Tetrimino::moveable(int Direction) {	// 0	left	1	right	2	down for one block
@@ -60,6 +30,13 @@ TetriminoPosition Tetrimino::moveable(int Direction) {	// 0	left	1	right	2	down 
 	return this->moveTo;
 }
 
+TetriminoPosition Tetrimino::rotatable() {
+	for (int i = 0; i < 4; ++i)
+		this->moveTo.tetrimino[i] = this->minos[i]->getPos() + this->Rotate[this->type].tetrimino[i];
+	this->type = (this->type + 1) % this->totalType;
+	return this->moveTo;
+}
+
 void Tetrimino::move() {	// 0	left	1	right	2	down for one block
 	for (int i = 0; i < 4; ++i) {
 		this->minos[i]->setPos(this->moveTo.tetrimino[i]);
@@ -71,7 +48,10 @@ bool Tetrimino::outOfBorder() {
 }
 
 Tetris_I::Tetris_I(int Type) {
+	this->totalType = 2;
 	this->type = Type;
+	this->Rotate[0] = TetriminoPosition(Position(1, 1), Position(0, 0), Position(-1, -1), Position(-2, -2));
+	this->Rotate[1] = TetriminoPosition(Position(-1, -1), Position(0, 0), Position(1, 1), Position(2, 2));
 	switch (this->type)
 	{
 	case 0:
@@ -92,7 +72,12 @@ Tetris_I::Tetris_I(int Type) {
 }
 
 Tetris_J::Tetris_J(int Type) {
+	this->totalType = 4;
 	this->type = Type;
+	this->Rotate[0] = TetriminoPosition(Position(1, 1), Position(0, 0), Position(-1, -1), Position(0, -2));
+	this->Rotate[1] = TetriminoPosition(Position(-1, 1), Position(0, 0), Position(1, -1), Position(2, 0));
+	this->Rotate[2] = TetriminoPosition(Position(-1, -1), Position(0, 0), Position(1, 1), Position(0, 2));
+	this->Rotate[3] = TetriminoPosition(Position(1, -1), Position(0, 0), Position(-1, 1), Position(-2, 0));
 	switch (this->type)
 	{
 	case 0:
@@ -125,7 +110,12 @@ Tetris_J::Tetris_J(int Type) {
 }
 
 Tetris_L::Tetris_L(int Type) {
+	this->totalType = 4;
 	this->type = Type;
+	this->Rotate[0] = TetriminoPosition(Position(-1, -1), Position(0, 0), Position(1, 1), Position(2, 0));
+	this->Rotate[1] = TetriminoPosition(Position(1, -1), Position(0, 0), Position(-1, 1), Position(0, 2));
+	this->Rotate[2] = TetriminoPosition(Position(1, 1), Position(0, 0), Position(-1, -1), Position(-2, 0));
+	this->Rotate[3] = TetriminoPosition(Position(-1, 1), Position(0, 0), Position(1, -1), Position(0, -2));
 	switch (this->type)
 	{
 	case 0:
@@ -158,6 +148,7 @@ Tetris_L::Tetris_L(int Type) {
 }
 
 Tetris_O::Tetris_O() {
+	this->totalType = 1;
 	this->type = 0;
 	minos[0] = new Mino(Position(15, 4));
 	minos[1] = new Mino(Position(15, 5));
@@ -166,7 +157,10 @@ Tetris_O::Tetris_O() {
 }
 
 Tetris_S::Tetris_S(int Type) {
+	this->totalType = 2;
 	this->type = Type;
+	this->Rotate[0] = TetriminoPosition(Position(-1, 0), Position(0, 1), Position(1, 0), Position(2, 1));
+	this->Rotate[1] = TetriminoPosition(Position(1, 0), Position(0, -1), Position(-1, 0), Position(-2, -1));
 	switch (this->type)
 	{
 	case 0:
@@ -187,7 +181,12 @@ Tetris_S::Tetris_S(int Type) {
 }
 
 Tetris_T::Tetris_T(int Type) {
+	this->totalType = 4;
 	this->type = Type;
+	this->Rotate[0] = TetriminoPosition(Position(1, -1), Position(1, 1), Position(0, 0), Position(-1, -1));
+	this->Rotate[1] = TetriminoPosition(Position(1, 1), Position(-1, 1), Position(0, 0), Position(1, -1));
+	this->Rotate[2] = TetriminoPosition(Position(-1, 1), Position(-1, -1), Position(0, 0), Position(1, 1));
+	this->Rotate[3] = TetriminoPosition(Position(-1, -1), Position(1, -1), Position(0, 0), Position(-1, 1));
 	switch (this->type)
 	{
 	case 0:
@@ -220,7 +219,10 @@ Tetris_T::Tetris_T(int Type) {
 }
 
 Tetris_Z::Tetris_Z(int Type) {
+	this->totalType = 2;
 	this->type = Type;
+	this->Rotate[0] = TetriminoPosition(Position(1, 1), Position(0, 0), Position(-1, -1), Position(0, -2));
+	this->Rotate[1] = TetriminoPosition(Position(-1, -1), Position(0, 0), Position(1, 1), Position(0, 2));
 	switch (this->type)
 	{
 	case 0:
@@ -240,34 +242,10 @@ Tetris_Z::Tetris_Z(int Type) {
 	}
 }
 
-TetriminoPosition Tetris_I::rotatable() {
-	this->moveTo
-}
-
-TetriminoPosition Tetris_J::rotatable() {
-
-}
-
-TetriminoPosition Tetris_L::rotatable() {
-
-}
-
 TetriminoPosition Tetris_O::rotatable() {
 	for (int i = 0; i < 4; ++i) {
 		this->moveTo.tetrimino[i].row = this->minos[i]->getPos().row;
 		this->moveTo.tetrimino[i].column = this->minos[i]->getPos().column;
 	}
 	return this->moveTo;
-}
-
-TetriminoPosition Tetris_S::rotatable() {
-
-}
-
-TetriminoPosition Tetris_T::rotatable() {
-
-}
-
-TetriminoPosition Tetris_Z::rotatable() {
-
 }

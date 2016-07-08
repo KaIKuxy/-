@@ -15,9 +15,11 @@ bool Position::operator==(const Position &temp) {
 	return temp.row == this->row && temp.column == this->column;
 }
 
-TetriminoPosition::TetriminoPosition() {
-
+Position& Position::operator+(const Position &temp) {
+	return Position(this->row + temp.row, this->column + temp.column);
 }
+
+TetriminoPosition::TetriminoPosition() {}
 
 TetriminoPosition::TetriminoPosition(Position a, Position b, Position c, Position d) {
 	this->tetrimino[0] = a;

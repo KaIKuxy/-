@@ -2,6 +2,7 @@
 
 struct Position {
 	bool operator == (const Position&);
+	Position& operator + (const Position&);
 	Position(int, int);
 	Position();
 	bool outOfBorder();

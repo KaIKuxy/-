@@ -22,3 +22,7 @@ Position Mino::getPos() {
 bool Mino::samePos(Position tryPos) {
 	return tryPos == this->pos;
 }
+
+bool Mino::onRow(int row) {
+	return this->pos.row == row;
+}
