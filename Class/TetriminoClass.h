@@ -10,12 +10,16 @@
 class Tetrimino{
 public:
 	Tetrimino();
-	TetriminoPosition moveable(int);				//	one-block moving action			0:left	1:right	2:down
-													//	return the next position
-	TetriminoPosition rotatable();					//	clockwise rotating action
-													//	return the next position
-	void move();									//	move to the next position using current action 
-	bool outOfBorder();								//	know if the next move or rotate is going to be (only) out of border
+	TetriminoPosition moveable(int);
+	//	one-block moving action			0:left	1:right	2:down
+	//	return the next position
+	TetriminoPosition rotatable();
+	//	clockwise rotating action
+	//	return the next position
+	void move();
+	//	move to the next position using current action 
+	bool outOfBorder();
+	//	know if the next move or rotate is going to be (only) out of border
 private:
 
 protected:
