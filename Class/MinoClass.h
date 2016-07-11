@@ -3,17 +3,19 @@
 //From left: 0 -> 9   From down: 0 -> 15
 //1280*720
 
-#include "Position.h"
+//#include "Position.h"
+#include <cocos2d.h>
+using namespace cocos2d;
 
 class Mino {
 public:
 	Mino();
-	Mino(Position);
-	void setPos(Position);
-	Position getPos();
-	bool samePos(Position);
+	Mino(Vec2);
+	void setPos(Vec2);
+	Vec2 getPos();
+	bool samePos(Vec2);
 	bool onRow(int);
 
 private:
-	Position pos;
+	Vec2 pos;
 };

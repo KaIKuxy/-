@@ -7,22 +7,22 @@
 
 Mino::Mino() {}
 
-Mino::Mino(Position pos) {
+Mino::Mino(Vec2 pos) {
 	this->pos = pos;
 }
 
-void Mino::setPos(Position setPos) {
+void Mino::setPos(Vec2 setPos) {
 	this->pos = setPos;
 }
 
-Position Mino::getPos() {
+Vec2 Mino::getPos() {
 	return this->pos;
 }
 
-bool Mino::samePos(Position tryPos) {
+bool Mino::samePos(Vec2 tryPos) {
 	return tryPos == this->pos;
 }
 
 bool Mino::onRow(int row) {
-	return this->pos.row == row;
+	return this->pos.x == row;
 }

@@ -6,18 +6,20 @@
 */
 
 #include "MinoClass.h"
+#include <array>
+using namespace std;
 
 class Tetrimino{
 public:
 	Tetrimino();
-	TetriminoPosition moveable(int);
+	std::array<Vec2, 4> moveable(int);
 	//	one-block moving action			0:left	1:right	2:down
-	//	return the next position
-	TetriminoPosition rotatable();
+	//	return the next position with Vec2
+	std::array<Vec2, 4> rotatable();
 	//	clockwise rotating action
-	//	return the next position
+	//	return the next position with Vec2
 	void move();
-	//	move to the next position using current action 
+	//	move to the next position using current action
 	bool outOfBorder();
 	//	know if the next move or rotate is going to be (only) out of border
 private:
@@ -26,8 +28,8 @@ protected:
 	Mino *minos[4];
 	int type;
 	int totalType;
-	TetriminoPosition moveTo;
-	TetriminoPosition Rotate[4];
+	std::array<Vec2, 4> moveTo;
+	std::array<Vec2, 4> Rotate[4];
 };
 
 class Tetris_I : public Tetrimino {	// type: 0	1
@@ -48,7 +50,7 @@ public:
 class Tetris_O : public Tetrimino {	// type: 0
 public:
 	Tetris_O();
-	TetriminoPosition rotatable();
+	std::array<Vec2, 4> rotatable();
 };
 
 class Tetris_S : public Tetrimino {	// type: 0	1
